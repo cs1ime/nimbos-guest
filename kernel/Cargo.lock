@@ -112,6 +112,7 @@ dependencies = [
  "serde",
  "tock-registers",
  "toml",
+ "virtio-drivers",
  "x2apic",
  "x86",
  "x86_64",
@@ -166,10 +167,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "virtio-drivers"
+version = "0.1.0"
+dependencies = [
+ "bitflags",
+ "log",
+ "volatile 0.3.0",
+]
+
+[[package]]
 name = "void"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6a02e4885ed3bc0f2de90ea6dd45ebcbb66dacffe03547fadbb0eeae2770887d"
+
+[[package]]
+name = "volatile"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f8e76fae08f03f96e166d2dfda232190638c10e0383841252416f9cfe2ae60e6"
 
 [[package]]
 name = "volatile"
@@ -209,7 +225,7 @@ checksum = "958ab3202b01bc43ba2eb832102c4a487ed93151667a2289062e5f2b00058be2"
 dependencies = [
  "bit_field",
  "bitflags",
- "volatile",
+ "volatile 0.4.4",
 ]
 
 [[package]]

@@ -26,6 +26,10 @@ impl PhysFrame {
         Some(f)
     }
 
+    pub fn from(start_paddr: PhysAddr) -> Self {
+        Self {start_paddr}
+    }
+
     pub fn start_paddr(&self) -> PhysAddr {
         self.start_paddr
     }
