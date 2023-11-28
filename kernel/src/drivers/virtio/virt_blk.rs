@@ -99,7 +99,7 @@ pub fn init ()
 
     let dev = Arc::new(VirtIOBlock::new());
 
-    let buf = &mut [0; 20];
+    let buf = &mut [0; 512];
     dev.read_block(0, buf);
 
 }
