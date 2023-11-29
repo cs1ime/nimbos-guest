@@ -100,6 +100,11 @@ pub fn init ()
     let dev = Arc::new(VirtIOBlock::new());
 
     let buf = &mut [0; 512];
-    dev.read_block(0, buf);
+    dev.read_block(1, buf);
+    println!("buf = {:#x}",buf[0]);
+    buf[0] = 2;
+    dev.write_block(1, buf);
+
+    println!("read ok!");
 
 }
