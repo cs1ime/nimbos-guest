@@ -51,6 +51,7 @@ impl PhysFrame {
 
 impl Drop for PhysFrame {
     fn drop(&mut self) {
+        // println!("drop = {:#x}",self.start_paddr.as_usize());
         FRAME_ALLOCATOR
             .lock()
             .dealloc(self.start_paddr.as_usize() / PAGE_SIZE);

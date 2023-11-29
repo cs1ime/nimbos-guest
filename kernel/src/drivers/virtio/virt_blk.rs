@@ -60,17 +60,24 @@ impl Hal for VirtioHal {
             let current_physaddr = current.start_paddr().as_usize();
             assert!(current_physaddr - prev_physaddr == PAGE_SIZE);
             prev_physaddr = current_physaddr;
+
+            core::mem::forget(current);
         }
+        core::mem::forget(start);
         start_physaddr
 
     }
 
     fn dma_dealloc(pa: usize, pages: usize) -> i32 {
+        println!("free phys page");
         let start_physaddr = pa;
         for i in 0..pages {
-            let frame = PhysFrame::from(PhysAddr::new(start_physaddr+i*PAGE_SIZE));
-            
+            let addr = start_physaddr+i*PAGE_SIZE;
+            println!("addr = {:#x}",addr);
+            let frame = PhysFrame::from(PhysAddr::new(addr));
+            drop(frame);
         }
+        println!("free phys page ok");
         0
     }
 
@@ -103,6 +110,9 @@ pub fn init ()
     dev.read_block(1, buf);
     println!("buf = {:#x}",buf[0]);
     buf[0] = 2;
+    for (idx,v) in buf.iter_mut().enumerate() {
+        *v = idx as u8;
+    }
     dev.write_block(1, buf);
 
     println!("read ok!");
